@@ -10,30 +10,29 @@ export class App extends React.PureComponent<Props, State> {
     pressedKey: '',
   };
 
-  onKeyDown = (event: KeyboardEvent) => {
+  handleKeyUp = (event: KeyboardEvent) => {
     this.setState({ pressedKey: event.key });
   };
 
   componentDidMount() {
-    document.addEventListener('keyup', this.onKeyDown);
+    document.addEventListener('keyup', this.handleKeyUp);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keyup', this.onKeyDown);
+    document.removeEventListener('keyup', this.handleKeyUp);
   }
 
   render() {
     const { pressedKey } = this.state;
 
     return (
-      <>
-        <div className="App">The last pressed key is [Enter]</div>
+      <div className="App">
         {pressedKey ? (
           <p className="App__message">The last pressed key is [{pressedKey}]</p>
         ) : (
           <p className="App__message">Nothing was pressed yet</p>
         )}
-      </>
+      </div>
     );
   }
 }
