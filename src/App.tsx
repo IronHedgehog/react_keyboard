@@ -22,16 +22,19 @@ export class App extends React.PureComponent<Props, State> {
     document.removeEventListener('keyup', this.handleKeyUp);
   }
 
-  render() {
+  private renderMessage(): React.ReactNode {
     const { pressedKey } = this.state;
 
-    return (
-      <div className="App">
-        {pressedKey
-          ? <p>The last pressed key is [{pressedKey}]</p>
-          : <p>Nothing was pressed yet</p>
-        }
-      </div>
-    );
+    if (pressedKey) {
+      return (
+        <p className="App__message">The last pressed key is [{pressedKey}]</p>
+      );
+    }
+
+    return <p className="App__message">Nothing was pressed yet</p>;
+  }
+
+  render() {
+    return <div className="App">{this.renderMessage()}</div>;
   }
 }
